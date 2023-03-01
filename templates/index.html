@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <title>Calculator</title>
+    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
+</head>
+
+<body>
+  <div style="padding: 100px 100px 10px;">
+    <h1><i>Loan Calculator</i></h1>
+    <div class="container">
+    <form class="form-control" name="myForm" action="/calculation" method="post">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="amount">Amount</label>
+            <input type="number" class="form-control" placeholder="0.00" min="0" step="0.01"
+                            id="amount" name="amount"  pattern="^\d+(?:\.\d{1,2})?$" required
+                            onblur="this.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="years">Years</label>
+            <input type="number" class="form-control" id="years" name="years" placeholder="3" min="1" max="7" step="1" required>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="interest">Interest Value: <output id="outvalue"></output></label>
+            <input type="range" class="form-control" id="interest" name="interest" min="0" max="1" step="0.01">
+          </div>
+        </div>
+        <br>
+        <button class="btn btn-success" type="submit">Calc</button>
+      </form>
+    </div>
+    <br>
+    <p><strong>Annual Payment: </strong>{{ yearly_payment }}</p>
+  </div>
+</body>
+
+<script>
+    const outvalue = document.querySelector("#outvalue")
+    const input = document.querySelector("#interest")
+    outvalue.textContent = input.value
+    input.addEventListener("input", (event) => {
+      outvalue.textContent = event.target.value
+    })
+</script>
+
+</html>

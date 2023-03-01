@@ -1,0 +1,18 @@
+h1 {
+    color: green;
+  }
+
+#interest {
+  border-radius: 12px;
+  height: 10px;
+  width: 600px;
+  outline: 15px;
+  }
+
+input[type='range']::-webkit-slider-thumb {
+  width: 14px;
+  -webkit-appearance: none;
+  height: 14px;
+  background: green;
+  border-radius: 2px;
+  }
